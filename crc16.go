@@ -48,7 +48,8 @@ var (
 // checksum. The first time New or Checksum are called with a
 // configuration structure c, they calculate the polynomial table for
 // this configuration; subsequent calls with the same c use the table
-// already calculated.
+// already calculated. A few commonly used configurations are defined
+// as global variables (X25, PPP, Modbus, etc.)
 type Conf struct {
 	Poly   uint16 // Polynomial to use.
 	BitRev bool   // Bit reversed CRC (bit-15 is X^0)?
@@ -140,8 +141,8 @@ func Update(crc uint16, tab *Table, p []byte) uint16 {
 	return crc
 }
 
-// Update returns the CRC-16 checksum of p using the polynomial table
-// tab constructed by MakeTableNBR (non-bit-reversed order). The
+// UpdateNBR returns the CRC-16 checksum of p using the polynomial
+// table tab constructed by MakeTableNBR (non-bit-reversed order). The
 // resulting CRC is in non-bit-reversed order (bit-0 corresponds to
 // the X^0 term). Argument CRC is the initial value of the CRC
 // register.
