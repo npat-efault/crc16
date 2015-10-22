@@ -75,17 +75,15 @@ func reverse(v uint16) uint16 {
 }
 
 // Calculate claculates the polynomial table for the given
-// configuration structure, *if* it has not already been calculated.
+// configuration structure.
 func (c *Conf) makeTable() {
-	c.once.Do(func() {
-		if c.BitRev {
-			c.table = MakeTable(reverse(c.Poly))
-			c.update = Update
-		} else {
-			c.table = MakeTableNBR(c.Poly)
-			c.update = UpdateNBR
-		}
-	})
+	if c.BitRev {
+		c.table = MakeTable(reverse(c.Poly))
+		c.update = Update
+	} else {
+		c.table = MakeTableNBR(c.Poly)
+		c.update = UpdateNBR
+	}
 }
 
 // Table is a 256-word table representing the polynomial for efficient
@@ -172,7 +170,7 @@ type Hash16 interface {
 // New creates a new hash.Hash16 computing the CRC-16 checksum using
 // the configuration c.
 func New(c *Conf) Hash16 {
-	c.makeTable()
+	c.once.Do(c.makeTable)
 	return &digest{crc: c.IniVal, conf: c}
 }
 
@@ -201,7 +199,7 @@ func (d *digest) Sum(in []byte) []byte {
 // Checksum returns the CRC-16 checksum of data using the
 // configuration c.
 func Checksum(c *Conf, data []byte) uint16 {
-	c.makeTable()
+	c.once.Do(c.makeTable)
 	return c.update(c.IniVal, c.table, data) ^ c.FinVal
 }
 
