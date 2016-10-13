@@ -13,7 +13,7 @@ Redundancy Check, or
 [CRC-16 checksum](http://en.wikipedia.org/wiki/Cyclic_redundancy_check).
 
 The package's API is almost identical to the standard-library's
-[hash/crc32](https://golang.org/pkg/hash/crc32/) and
+[hash/crc32](https://golang.org/pkg/hash/crc32/) and 
 [hash/crc64](https://golang.org/pkg/hash/crc64/)package.
 
 Package crc16 supports CRC calculation in all possible configurations:
@@ -21,3 +21,4 @@ Polynomial, bit-order, byte-order, initial-values, and final value can
 all be selected. Predefined configurations are supplied for the most
 common uses (e.g. PPP).
 
+(See also(http://npat-efault.github.io/programming/2015/09/15/CRC-stuff.html)
