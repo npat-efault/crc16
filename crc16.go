@@ -15,11 +15,11 @@ import (
 // The size of a CRC-16 checksum in bytes.
 const Size = 2
 
+// Typical CRC-16 configurations. Mostly used are the CCITT (0x1021)
+// and the IBM/ANSI (0x8005) polynomials, either bit-reversed or
+// not. For more configurations see:
+// http://reveng.sourceforge.net/crc-catalogue/
 var (
-	// Typical CRC-16 configurations. Mostly used are the CCITT
-	// (0x1021) and the IBM/ANSI (0x8005) polynomials, either
-	// bit-reversed or not. For more configurations see:
-	// http://reveng.sourceforge.net/crc-catalogue/
 	X25 = &Conf{
 		Poly: 0x1021, BitRev: true,
 		IniVal: 0xffff, FinVal: 0xffff,
@@ -55,7 +55,7 @@ type Conf struct {
 	BitRev bool   // Bit reversed CRC (bit-15 is X^0)?
 	IniVal uint16 // Initial value of CRC register.
 	FinVal uint16 // XOR CRC with this at the end.
-	BigEnd bool   // Emit *bytes* most significant first?
+	BigEnd bool   // Emit *bytes* most significant first (see Hash.Sum)?
 	once   sync.Once
 	table  *Table
 	update func(uint16, *Table, []byte) uint16
