@@ -21,4 +21,4 @@ Polynomial, bit-order, byte-order, initial-values, and final value can
 all be selected. Predefined configurations are supplied for the most
 common uses (e.g. PPP).
 
-(See [also](http://npat-efault.github.io/programming/2015/09/15/CRC-stuff.html)
+(See [also](http://npat-efault.github.io/programming/2015/09/15/CRC-stuff.html))
