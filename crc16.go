@@ -75,7 +75,7 @@ func reverse(v uint16) uint16 {
 	return r
 }
 
-// Calculate claculates the polynomial table for the given
+// makeTable claculates the polynomial table for the given
 // configuration structure.
 func (c *Conf) makeTable() {
 	if c.BitRev {
